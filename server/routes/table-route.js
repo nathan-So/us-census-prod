@@ -11,8 +11,7 @@ const tableRoutes = require("../controllers/table-controller");
 //! Create router
 const router = express.Router();
 
-//! Add route for GET request to retrieve all citizens
-// router.get("/all", tableRoutes.census_learn_sqlAll);
+//! Add route for GET request to retrieve the asked citizens
 router.get("/all", tableRoutes.census_learn_sqlAll);
 
 //*

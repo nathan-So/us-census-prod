@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const compression = require("compression");
 const cors = require("cors");
 const helmet = require("helmet");
+// const path = require("path");
 
 //! Import routes
 const tableRouter = require("./routes/table-route");
@@ -21,13 +22,17 @@ app.use(compression());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//! Implement table route
+//? ************* Test to deploy on heroku // fail cause of SQLite db not supported, must convert to PSQL
+//! Serve static files from the React app
+// app.use(express.static(path.join(__dirname, "client/build")));
+
+//! Put all API endpoints under '/table'
 app.use("/table", tableRouter);
 
 //! Implement 500 error route
 app.use(function (err, req, res, next) {
   console.error(err.stack);
-  res.status(500).send("Something is broker.");
+  res.status(500).send("Something is broken.");
 });
 
 //! Implement 404 error route
